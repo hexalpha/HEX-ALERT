@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="560" viewBox="0 0 1600 560" role="img" aria-labelledby="title desc">
+  <title id="title">HEX ALERT by HEX SECURITY</title>
+  <desc id="desc">Cyber intelligence. Built to reach your community. Collect, understand, route.</desc>
+  <defs>
+    <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#09121f"/><stop offset="1" stop-color="#142337"/></linearGradient>
+    <radialGradient id="glow"><stop stop-color="#45e0bb" stop-opacity=".16"/><stop offset="1" stop-color="#45e0bb" stop-opacity="0"/></radialGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M 48 0 L 0 0 0 48" fill="none" stroke="#a8c6dd" stroke-opacity=".055"/></pattern>
+  </defs>
+  <rect width="1600" height="560" rx="24" fill="url(#bg)"/>
+  <rect width="1600" height="560" rx="24" fill="url(#grid)"/>
+  <ellipse cx="1275" cy="230" rx="350" ry="330" fill="url(#glow)"/>
+  <g font-family="Inter,Segoe UI,Arial,sans-serif">
+    <text x="76" y="74" fill="#72e4c6" font-size="17" font-weight="700" letter-spacing="5">HEX SECURITY / INTELLIGENCE SYSTEMS</text>
+    <text x="70" y="194" fill="#f4f8ff" font-size="99" font-weight="800" letter-spacing="-4">HEX ALERT</text>
+    <text x="76" y="257" fill="#d0ddec" font-size="31" font-weight="500">Cyber intelligence. Built to reach your community.</text>
+    <text x="77" y="309" fill="#96acc2" font-size="21">Jobs · CVEs · News · Threats · Technology</text>
+    <g transform="translate(76 376)">
+      <rect width="237" height="62" rx="12" fill="#18352f" stroke="#397969"/>
+      <circle cx="26" cy="31" r="5" fill="#72e4c6"/>
+      <text x="44" y="38" fill="#b3f5e3" font-size="18">Self-hosted by design</text>
+      <rect x="257" width="213" height="62" rx="12" fill="#16263b" stroke="#314860"/>
+      <text x="283" y="38" fill="#ccd9e8" font-size="18">Discord connected</text>
+      <rect x="490" width="174" height="62" rx="12" fill="#16263b" stroke="#314860"/>
+      <text x="518" y="38" fill="#ccd9e8" font-size="18">Local AI ready</text>
+    </g>
+    <text x="78" y="511" fill="#728da7" font-size="15" letter-spacing="2">COLLECT   /   UNDERSTAND   /   ROUTE</text>
+  </g>
+  <g transform="translate(1265 260)" fill="none">
+    <path d="M0 -174 151 -87 151 87 0 174 -151 87 -151 -87Z" stroke="#6de4c4" stroke-opacity=".22" stroke-width="2"/>
+    <path d="M0 -137 119 -69 119 69 0 137 -119 69 -119 -69Z" stroke="#6de4c4" stroke-opacity=".55" stroke-width="2"/>
+    <path d="M0 -89 74 -47 69 37 Q49 78 0 105 Q-49 78 -69 37 L-74 -47Z" fill="#112e2f" stroke="#72e4c6" stroke-width="4"/>
+    <path d="M-32 1 -8 25 39 -23" stroke="#b5f7e5" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+    <g fill="#72e4c6"><circle cx="0" cy="-174" r="5"/><circle cx="151" cy="87" r="5"/><circle cx="-151" cy="87" r="5"/></g>
+  </g>
+</svg>

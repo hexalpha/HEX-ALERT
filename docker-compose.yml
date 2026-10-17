@@ -1,0 +1,67 @@
+services:
+  bot:
+    build: .
+    image: hex-alert-bot:local
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      API_HOST: 0.0.0.0
+      HEX_ALERT_CONFIG_DIR: /app/runtime-config
+      LOCAL_GGUF_URL: http://llm:8081
+    ports: ["127.0.0.1:8080:8080"]
+    volumes: ["hex_runtime_config:/app/runtime-config", "hex_backups:/app/backups"]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8080/health', timeout=5)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    depends_on:
+      db: {condition: service_healthy}
+      config-init: {condition: service_completed_successfully}
+  config-init:
+    image: hex-alert-bot:local
+    user: "0:0"
+    restart: "no"
+    entrypoint: ["sh", "-c"]
+    command: ["chown -R app:app /app/runtime-config && chmod 700 /app/runtime-config"]
+    volumes: ["hex_runtime_config:/app/runtime-config"]
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-hexalert}
+      POSTGRES_USER: ${POSTGRES_USER:-hexalert}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+    volumes: ["postgres_data:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+  llm:
+    build:
+      context: .
+      dockerfile: llm/Dockerfile
+    restart: unless-stopped
+    environment:
+      LOCAL_GGUF_MODEL: /models/CyberSecurity.gguf
+    volumes:
+      - type: bind
+        source: ./CyberSecurity.gguf
+        target: /models/CyberSecurity.gguf
+        read_only: true
+        bind:
+          create_host_path: false
+      - llm_state:/state
+    healthcheck:
+      test: ["CMD", "/opt/hex-llm/bin/python", "-c", "import json,urllib.request; s=json.load(urllib.request.urlopen('http://localhost:8081/health',timeout=3)); assert s['status']=='ready'"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 180s
+volumes:
+  postgres_data:
+  hex_backups:
+  hex_runtime_config:
+  llm_state:

@@ -1,0 +1,2 @@
+# The released Windows launcher is a native .NET Framework WinForms executable.
+# No Python packages are needed to run or build dist\HEX-ALERT.exe.

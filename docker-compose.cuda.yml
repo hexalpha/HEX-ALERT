@@ -1,0 +1,8 @@
+# Optional deployment override; normal CPU Compose does not require an NVIDIA driver.
+# docker compose -f docker-compose.yml -f docker-compose.cuda.yml up -d --build llm
+services:
+  llm:
+    build:
+      args:
+        LLAMA_IMAGE: ghcr.io/ggml-org/llama.cpp@sha256:6cdf9529493b9581c421fec5628dcd4b8dd7c09507fc7d27ad739cc9205d66f5
+    gpus: all

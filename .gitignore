@@ -1,0 +1,53 @@
+# Secrets and machine-local configuration
+.env
+.env.*
+!.env.example
+!.env.example.*
+runtime-config/
+config/runtime/
+llm/runtime/
+
+# Databases, backups, logs, and exported data
+backups/
+*.db
+*.sqlite
+*.sqlite3
+*.dump
+*.sql
+*.log
+logs/
+artifacts/
+
+# Large model weights and generated release bundles
+*.gguf
+/dist/
+/release/
+launcher/dist/
+launcher/staging/
+launcher/staging-build/
+launcher/build/
+launcher/archive/
+launcher/.builddeps/
+launcher/staging*/
+
+# Python and test artifacts
+.venv/
+venv/
+.testdeps/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.pytest-tmp/
+.coverage
+htmlcov/
+
+# Local editor / operating-system files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Development-only reports may contain local identifiers or deployment details
+/HEX ALERT FINAL READINESS REPORT.md
+/PROJECT_AUDIT.md
+/DEPENDENCY_AUDIT.md

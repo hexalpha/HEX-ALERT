@@ -1,0 +1,39 @@
+name: Verify
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      TEST_MODE: "true"
+      AI_PROVIDER: disabled
+      DATABASE_URL: "sqlite+aiosqlite:///:memory:"
+      HEX_ALERT_CONFIG_DIR: ${{ runner.temp }}/hex-alert-runtime
+      SESSION_SECRET: ci-only-session-secret-longer-than-thirty-two-characters
+      DASHBOARD_API_KEY: ci-only-dashboard-key-longer-than-thirty-two-characters
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install dependencies
+        run: python -m pip install -r requirements.lock.txt "pytest>=8,<9" "pytest-asyncio>=0.24,<1" "aiosqlite>=0.20,<1"
+      - name: Run isolated regression suite
+        run: python -m pytest -v
+      - name: Python syntax
+        run: python -m compileall -q api bot collectors config database launcher llm services scripts manage.py main.py
+      - name: Dashboard JavaScript syntax
+        run: for file in api/static/*.js; do node --check "$file"; done
+      - name: Compose validation with fresh configuration
+        run: |
+          python scripts/setup_local.py
+          docker compose config --quiet
