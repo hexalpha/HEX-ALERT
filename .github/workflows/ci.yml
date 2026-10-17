@@ -13,7 +13,7 @@ jobs:
       TEST_MODE: "true"
       AI_PROVIDER: disabled
       DATABASE_URL: "sqlite+aiosqlite:///:memory:"
-      HEX_ALERT_CONFIG_DIR: ${{ runner.temp }}/hex-alert-runtime
+      HEX_ALERT_CONFIG_DIR: /tmp/hex-alert-runtime
       SESSION_SECRET: ci-only-session-secret-longer-than-thirty-two-characters
       DASHBOARD_API_KEY: ci-only-dashboard-key-longer-than-thirty-two-characters
     steps:
